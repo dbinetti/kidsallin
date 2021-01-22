@@ -1,0 +1,348 @@
+
+# First-Party
+from address.models import AddressField
+from django.contrib.auth.models import AbstractBaseUser
+from django.db import models
+from hashid_field import HashidAutoField
+from model_utils import Choices
+from phonenumber_field.modelfields import PhoneNumberField
+
+# Local
+from .managers import UserManager
+
+
+class Parent(models.Model):
+    id = HashidAutoField(
+        primary_key=True,
+    )
+    name = models.CharField(
+        max_length=100,
+        blank=False,
+        default='',
+        help_text="""Your real name (may include spouse as family).""",
+    )
+    address = AddressField(
+        blank=True,
+        null=True,
+        on_delete=models.CASCADE,
+    )
+    email = models.EmailField(
+        blank=True,
+        null=True,
+    )
+    phone = PhoneNumberField(
+        blank=True,
+        null=True,
+    )
+    is_public = models.BooleanField(
+        blank=False,
+        help_text="""If you'd like to make your name public on the website, click here.""",
+    )
+    is_teacher = models.BooleanField(
+        blank=False,
+        help_text="""If you're an educator, click here.""",
+    )
+    is_medical = models.BooleanField(
+        blank=False,
+        help_text="""If you're a medical professional, click here.""",
+    )
+    comments = models.TextField(
+        max_length=2000,
+        blank=True,
+        default='',
+        help_text="""If you'd like to add a public comment, add it here.  (Note: only productive, on-topic comments will be posted, you must use your real name, and you must set your overall status to 'public'.)""",
+    )
+    notes = models.TextField(
+        max_length=2000,
+        blank=True,
+        default='',
+        help_text="""If you'd like to add any private notes, add it here.  (Note: these are things you want us to know.)""",
+    )
+    created = models.DateTimeField(
+        auto_now_add=True,
+    )
+    updated = models.DateTimeField(
+        auto_now=True,
+    )
+    user = models.OneToOneField(
+        'app.User',
+        on_delete=models.SET_NULL,
+        related_name='parent',
+        null=True,
+        unique=True,
+    )
+
+
+class School(models.Model):
+
+    STATUS = Choices(
+        (0, 'new', "New"),
+        (10, 'active', "Active"),
+        (20, 'closed', "Closed"),
+        (30, 'merged', "Merged"),
+    )
+    KIND = Choices(
+        (0, 'new', "New"),
+        (10, 'public', "Public"),
+        (20, 'private', "Private"),
+    )
+    LEVEL = Choices(
+        (510, 'ps', 'Preschool'),
+        (520, 'elem', 'Elementary'),
+        (530, 'intmidjr', 'Intermediate/Middle/Junior High'),
+        (540, 'hs', 'High School'),
+        (550, 'elemhigh', 'Elementary-High Combination'),
+        (555, 'secondary', 'Secondary'),
+        (560, 'a', 'Adult'),
+        (570, 'ug', 'Ungraded'),
+    )
+    GRADE = Choices(
+        (-1, 'p', 'Preschool'),
+        (0, 'k', 'Kindergarten'),
+        (1, 'first', 'First Grade'),
+        (2, 'second', 'Second Grade'),
+        (3, 'third', 'Third Grade'),
+        (4, 'fourth', 'Fourth Grade'),
+        (5, 'fifth', 'Fifth Grade'),
+        (6, 'sixth', 'Sixth Grade'),
+        (7, 'seventh', 'Seventh Grade'),
+        (8, 'eighth', 'Eighth Grade'),
+        (9, 'ninth', 'Ninth Grade'),
+        (10, 'tenth', 'Tenth Grade'),
+        (11, 'eleventh', 'Eleventh Grade'),
+        (12, 'twelfth', 'Twelfth Grade'),
+    )
+    id = HashidAutoField(
+        primary_key=True,
+    )
+    status = models.IntegerField(
+        blank=False,
+        choices=STATUS,
+        default=STATUS.new,
+    )
+    name = models.CharField(
+        max_length=255,
+        blank=False,
+    )
+    description = models.TextField(
+        blank=True,
+    )
+    # slug = AutoSlugField(
+    #     max_length=255,
+    #     always_update=True,
+    #     populate_from='__str__',
+    #     unique=True,
+    # )
+    kind = models.IntegerField(
+        blank=False,
+        choices=KIND,
+        default=KIND.new,
+    )
+    level = models.IntegerField(
+        blank=True,
+        null=True,
+        choices=LEVEL,
+    )
+    nces_id = models.CharField(
+        max_length=50,
+        blank=True,
+        null=True,
+        unique=True,
+    )
+    low_grade = models.IntegerField(
+        blank=True,
+        choices=GRADE,
+        null=True,
+    )
+    high_grade = models.IntegerField(
+        blank=True,
+        choices=GRADE,
+        null=True,
+    )
+    # grades = ArrayField(
+    #     models.IntegerField(
+    #         choices=GRADE,
+    #     ),
+    #     blank=True,
+    #     null=True,
+    # )
+    address = models.CharField(
+        max_length=255,
+        blank=True,
+        default='',
+    )
+    city = models.CharField(
+        max_length=255,
+        blank=False,
+        default='',
+    )
+    state = models.CharField(
+        max_length=255,
+        blank=False,
+        default='',
+    )
+    zipcode = models.CharField(
+        max_length=255,
+        blank=True,
+        default='',
+    )
+    county = models.CharField(
+        max_length=255,
+        blank=True,
+    )
+    phone = models.CharField(
+        max_length=255,
+        blank=True,
+        default='',
+    )
+    website = models.URLField(
+        blank=True,
+        default='',
+    )
+    # geo = models.JSONField(
+    #     encoder=DjangoJSONEncoder,
+    #     null=True,
+    #     blank=True,
+    # )
+    lat = models.DecimalField(
+        max_digits=10,
+        decimal_places=6,
+        null=True,
+        blank=True,
+    )
+    lon = models.DecimalField(
+        max_digits=10,
+        decimal_places=6,
+        null=True,
+        blank=True,
+    )
+    created = models.DateTimeField(
+        auto_now_add=True,
+    )
+    updated = models.DateTimeField(
+        auto_now=True,
+    )
+    # search_vector = SearchVectorField(
+    #     null=True,
+    # )
+
+    def __str__(self):
+        return f"{self.name}"
+
+    def location(self):
+        return (self.lat, self.lon)
+
+    # def grades_display(self):
+    #     return [self.GRADE[x] for x in self.grades]
+
+    def should_index(self):
+        if self.status == self.STATUS.active:
+            return True
+        return False
+
+    # class Meta:
+    #     indexes = [
+    #         GinIndex(fields=['search_vector'])
+    #     ]
+
+
+class Student(models.Model):
+    id = HashidAutoField(
+        primary_key=True,
+    )
+    name = models.CharField(
+        max_length=100,
+        blank=False,
+        default='',
+        help_text="""Please add your student's name or initials.  Will remain private!""",
+    )
+    GRADE = Choices(
+        (-1, 'p', 'Preschool'),
+        (0, 'k', 'Kindergarten'),
+        (1, 'first', 'First Grade'),
+        (2, 'second', 'Second Grade'),
+        (3, 'third', 'Third Grade'),
+        (4, 'fourth', 'Fourth Grade'),
+        (5, 'fifth', 'Fifth Grade'),
+        (6, 'sixth', 'Sixth Grade'),
+        (7, 'seventh', 'Seventh Grade'),
+        (8, 'eighth', 'Eighth Grade'),
+        (9, 'ninth', 'Ninth Grade'),
+        (10, 'tenth', 'Tenth Grade'),
+        (11, 'eleventh', 'Eleventh Grade'),
+        (12, 'twelfth', 'Twelfth Grade'),
+    )
+    grade = models.IntegerField(
+        blank=False,
+        choices=GRADE,
+        help_text='Grade',
+    )
+    school = models.ForeignKey(
+        'app.School',
+        on_delete=models.CASCADE,
+        related_name='schools',
+    )
+    parent = models.ForeignKey(
+        'app.Parent',
+        on_delete=models.CASCADE,
+        related_name='schools',
+    )
+
+
+class User(AbstractBaseUser):
+    id = HashidAutoField(
+        primary_key=True,
+    )
+    username = models.CharField(
+        max_length=150,
+        blank=False,
+        null=False,
+        unique=True,
+    )
+    data = models.JSONField(
+        null=True,
+        editable=False,
+    )
+    name = models.CharField(
+        max_length=100,
+        blank=True,
+        default='(Unknown)',
+        verbose_name="Name",
+        editable=False,
+    )
+    email = models.EmailField(
+        blank=True,
+        null=True,
+        editable=False,
+    )
+    is_active = models.BooleanField(
+        default=True,
+    )
+    is_admin = models.BooleanField(
+        default=False,
+    )
+    created = models.DateTimeField(
+        auto_now_add=True,
+    )
+    updated = models.DateTimeField(
+        auto_now=True,
+    )
+
+    USERNAME_FIELD = 'username'
+    REQUIRED_FIELDS = [
+    ]
+
+    objects = UserManager()
+
+    @property
+    def is_staff(self):
+        return self.is_admin
+
+    def __str__(self):
+        return str(self.username)
+
+    def has_perm(self, perm, obj=None):
+        return True
+
+    def has_module_perms(self, app_label):
+        return True

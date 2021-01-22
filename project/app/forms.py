@@ -1,0 +1,94 @@
+# Django
+from django import forms
+from django.contrib.auth.forms import UserChangeForm as UserChangeFormBase
+from django.contrib.auth.forms import UserCreationForm as UserCreationFormBase
+from django.core.exceptions import ValidationError
+
+# Local
+from .models import Parent
+from .models import User
+
+
+class DeleteForm(forms.Form):
+    confirm = forms.BooleanField(
+        required=True,
+    )
+
+class ParentForm(forms.ModelForm):
+    def __init__(self, *args, **kwargs):
+        super().__init__(*args, **kwargs)
+        # Required fields override
+        # self.fields['address'].required = True
+
+    class Meta:
+        model = Parent
+        fields = [
+            'name',
+            'phone',
+            'email',
+            'is_public',
+            'is_teacher',
+            'is_medical',
+            'comments',
+            'notes',
+        ]
+        labels = {
+            "is_public": "Please make my name Public",
+            "is_teacher": "I am a Professional Educator",
+            "is_medical": "I am a Medical Professional",
+        }
+        widgets = {
+            'comments': forms.Textarea(
+                attrs={
+                    'class': 'form-control h-25',
+                    'placeholder': 'Any public comments to share? (Optional, Public)',
+                    'rows': 5,
+                }
+            ),
+            'notes': forms.Textarea(
+                attrs={
+                    'class': 'form-control h-25',
+                    'placeholder': 'Anything else we should know? (Optional, Private)',
+                    'rows': 5,
+                }
+            )
+        }
+        help_texts = {
+        }
+
+
+class UserCreationForm(UserCreationFormBase):
+    """
+    Custom user creation form for Auth0
+    """
+
+    # Bypass password requirement
+    def __init__(self, *args, **kwargs):
+        super().__init__(*args, **kwargs)
+        self.fields['password1'].required = False
+        self.fields['password2'].required = False
+
+    def save(self, commit=True):
+        user = super().save(commit=False)
+        user.set_unusable_password()
+        if commit:
+            user.save()
+        return user
+
+    class Meta:
+        model = User
+        fields = [
+            'username',
+        ]
+
+
+class UserChangeForm(UserChangeFormBase):
+    """
+    Custom user change form for Auth0
+    """
+
+    class Meta:
+        model = User
+        fields = [
+            'username',
+        ]

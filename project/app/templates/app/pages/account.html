@@ -1,0 +1,70 @@
+{% extends 'app/pages/base.html' %}
+
+{% load bootstrap4 %}
+{% load humanize %}
+
+{% block title %}Your Account{% endblock title %}
+
+{% block content %}
+  <section class='my-5'>
+    <h2>
+      Your Account
+    </h2>
+    {% if user.is_admin %}
+      <div class='my-5 ml-2'>
+        <a href="{% url 'admin:index' %}">Admin</a>
+      </div>
+    {% endif %}
+  </section>
+  {% comment %}
+  <section class='my-5'>
+    <p class='lead'>
+      Update your information below.
+    </p>
+  </section>
+  {% endcomment %}
+  {% if parent %}
+    <section class='mt-2 mt-5'>
+      <div class='card'>
+        <h4 class='card-header'>
+          Parent Information
+        </h4>
+        <div class='card-body'>
+          <ul class='list-unstyled'>
+            <li><strong>Name:&nbsp;&nbsp;</strong>{{parent.name}}</li>
+            <li><strong>Email:&nbsp;&nbsp;</strong>{{parent.email}}</li>
+            <li><strong>Phone:&nbsp;&nbsp;</strong>{{parent.phone}}</li>
+            <li><strong>Address:&nbsp;&nbsp;</strong>{{parent.address}}</li>
+            <li><strong>Public?&nbsp;&nbsp;</strong>{{parent.is_dog|yesno|title}}</li>
+            <li><strong>Educator?&nbsp;&nbsp;</strong>{{parent.is_dog|yesno|title}}</li>
+            <li><strong>Medical?&nbsp;&nbsp;</strong>{{parent.is_dog|yesno|title}}</li>
+            <li><strong>Comments:&nbsp;&nbsp;</strong>{{parent.comments|default:"(No Comments)"}}</li>
+            <li><strong>Notes:&nbsp;&nbsp;</strong>{{parent.notes|default:"(No Notes)"}}</li>
+          </ul>
+        </div>
+        <div class='card-footer'>
+          <ul class='list-inline'>
+            <li class='float-right'>
+              <a href='{% url "parent-delete" %}' class='text-danger'>
+                Remove me as Parent
+              </a>
+            </li>
+            <li>
+              <a href='{% url "parent-update" %}' class="btn btn-lg btn-success">
+                Update this Information
+              </a>
+            </li>
+          </ul>
+        </div>
+      </div>
+    </section>
+  {% else %}
+    <a href='{% url "parent" %}' class="btn btn-success btn-block btn-lg my-5">
+      Register as a Parent!
+    </a>
+  {% endif %}
+
+  <section class='ml-2 my-5'>
+    <a href='{% url "account-delete" %}'><span class='text-danger'>Delete Account</span></a>
+  </section>
+{% endblock content %}

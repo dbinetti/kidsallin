@@ -1,0 +1,12 @@
+{% autoescape off %}
+
+Your registration for Kids All In is confirmed!
+
+
+*Details*
+Name: {{recipient.name}}
+Email: {{recipient.email}}
+Dog in Yard? {{recipient.is_dog|yesno|title}}
+
+
+{% endautoescape %}
