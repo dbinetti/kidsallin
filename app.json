@@ -63,6 +63,12 @@
         "AUTH0_DOMAIN": {
           "value": "foo.com"
         },
+        "MAILCHIMP_API_KEY": {
+          "generator": "secret"
+        },
+        "MAILCHIMP_AUDIENCE_ID": {
+          "generator": "secret"
+        },
         "SENDGRID_API_KEY": {
           "generator": "secret"
         },
