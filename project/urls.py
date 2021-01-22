@@ -29,11 +29,14 @@ if settings.DEBUG:
     import debug_toolbar
     def custom_page_not_found(request):
         return page_not_found(request, None)
+    def trigger_error(request):
+        return 1/0
 
     urlpatterns += [
         path('__debug__/', include(debug_toolbar.urls)),
         path('404/', custom_page_not_found),
         path('500/', server_error),
+        path('sentry-debug/', trigger_error),
     ]
 else:
     def handler500(request, *args, **argv):
