@@ -6,6 +6,7 @@ from django.core.exceptions import ValidationError
 
 # Local
 from .models import Parent
+from .models import School
 from .models import User
 
 
@@ -55,6 +56,18 @@ class ParentForm(forms.ModelForm):
         }
         help_texts = {
         }
+
+
+class SchoolForm(forms.ModelForm):
+    class Meta:
+        model = School
+        fields = [
+            'name',
+            'nces_id',
+            'phone',
+            'lat',
+            'lon',
+        ]
 
 
 class UserCreationForm(UserCreationFormBase):

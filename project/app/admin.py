@@ -75,7 +75,6 @@ class Parent(admin.ModelAdmin):
 class SchoolAdmin(admin.ModelAdmin):
     fields = [
         'name',
-        'status',
         'kind',
         'level',
         'nces_id',
@@ -109,7 +108,6 @@ class SchoolAdmin(admin.ModelAdmin):
     ]
     list_filter = [
         'level',
-        'status',
     ]
     search_fields = [
         'name',

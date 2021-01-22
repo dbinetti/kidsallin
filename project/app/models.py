@@ -2,6 +2,7 @@
 # First-Party
 from address.models import AddressField
 from django.contrib.auth.models import AbstractBaseUser
+from django.contrib.postgres.fields import ArrayField
 from django.db import models
 from hashid_field import HashidAutoField
 from model_utils import Choices
@@ -75,17 +76,6 @@ class Parent(models.Model):
 
 class School(models.Model):
 
-    STATUS = Choices(
-        (0, 'new', "New"),
-        (10, 'active', "Active"),
-        (20, 'closed', "Closed"),
-        (30, 'merged', "Merged"),
-    )
-    KIND = Choices(
-        (0, 'new', "New"),
-        (10, 'public', "Public"),
-        (20, 'private', "Private"),
-    )
     LEVEL = Choices(
         (510, 'ps', 'Preschool'),
         (520, 'elem', 'Elementary'),
@@ -115,28 +105,9 @@ class School(models.Model):
     id = HashidAutoField(
         primary_key=True,
     )
-    status = models.IntegerField(
-        blank=False,
-        choices=STATUS,
-        default=STATUS.new,
-    )
     name = models.CharField(
         max_length=255,
         blank=False,
-    )
-    description = models.TextField(
-        blank=True,
-    )
-    # slug = AutoSlugField(
-    #     max_length=255,
-    #     always_update=True,
-    #     populate_from='__str__',
-    #     unique=True,
-    # )
-    kind = models.IntegerField(
-        blank=False,
-        choices=KIND,
-        default=KIND.new,
     )
     level = models.IntegerField(
         blank=True,
@@ -159,13 +130,13 @@ class School(models.Model):
         choices=GRADE,
         null=True,
     )
-    # grades = ArrayField(
-    #     models.IntegerField(
-    #         choices=GRADE,
-    #     ),
-    #     blank=True,
-    #     null=True,
-    # )
+    grades = ArrayField(
+        models.IntegerField(
+            choices=GRADE,
+        ),
+        blank=True,
+        null=True,
+    )
     address = models.CharField(
         max_length=255,
         blank=True,
@@ -199,11 +170,6 @@ class School(models.Model):
         blank=True,
         default='',
     )
-    # geo = models.JSONField(
-    #     encoder=DjangoJSONEncoder,
-    #     null=True,
-    #     blank=True,
-    # )
     lat = models.DecimalField(
         max_digits=10,
         decimal_places=6,
@@ -232,13 +198,11 @@ class School(models.Model):
     def location(self):
         return (self.lat, self.lon)
 
-    # def grades_display(self):
-    #     return [self.GRADE[x] for x in self.grades]
+    def grades_display(self):
+        return [self.GRADE[x] for x in self.grades]
 
     def should_index(self):
-        if self.status == self.STATUS.active:
-            return True
-        return False
+        return True
 
     # class Meta:
     #     indexes = [
