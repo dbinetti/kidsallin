@@ -2,6 +2,7 @@
 import csv
 
 import requests
+from app.forms import SchoolForm
 # First-Party
 from auth0.v3.authentication import GetToken
 from auth0.v3.management import Auth0
@@ -15,8 +16,6 @@ from django.http import FileResponse
 from django.template.loader import render_to_string
 from django_rq import job
 
-from app.forms import SchoolForm
-
 
 # Auth0
 def get_auth0_token():
@@ -27,6 +26,7 @@ def get_auth0_token():
         f'https://{settings.AUTH0_DOMAIN}/api/v2/',
     )
     return token
+
 
 def get_auth0_client():
     token = get_auth0_token()
