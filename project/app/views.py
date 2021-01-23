@@ -1,5 +1,6 @@
 import csv
 
+import jwt
 import requests
 from auth0.v3.authentication.users import Users
 from django.conf import settings
@@ -72,11 +73,12 @@ def callback(request):
         token_url,
         json=token_payload,
     ).json()
-    print(token)
-    access_token = token['access_token']
-    user_url = f'https://{settings.AUTH0_TENANT}/userinfo?access_token={access_token}'
-    payload = requests.get(user_url).json()
-    # format payload key
+    payload = jwt.decode(
+        token['id_token'],
+        options={
+            'verify_signature': False,
+        }
+    )
     payload['username'] = payload.pop('sub')
     user = authenticate(request, **payload)
     if user:

@@ -35,6 +35,7 @@ django-address = "*"
 phonenumberslite = "*"
 django-phonenumber-field = "*"
 nameparser = "*"
+pyjwt = "*"
 django-cloudinary-storage = "*"
 jedi = "==0.17.2"
 
