@@ -117,12 +117,12 @@ PHONENUMBER_DEFAULT_REGION = 'US'
 
 # Sentry
 
-# SENTRY_DSN = env("SENTRY_DSN")
-# SENTRY_ENVIRONMENT = env("SENTRY_ENVIRONMENT")
-# SENTRY_CONFIG = {
-#     'send_default_pii': True,
-#     'traces_sample_rate': 1,
-# }
+SENTRY_DSN = env("SENTRY_DSN")
+SENTRY_ENVIRONMENT = env("SENTRY_ENVIRONMENT")
+SENTRY_CONFIG = {
+    'send_default_pii': True,
+    'traces_sample_rate': 1,
+}
 
 # Bootstrap
 BOOTSTRAP4 = {
