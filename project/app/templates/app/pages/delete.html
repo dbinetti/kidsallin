@@ -2,12 +2,12 @@
 
 {% load bootstrap4 %}
 
-{% block title %}Remove Recipient{% endblock title %}
+{% block title %}Delete Account{% endblock title %}
 
 {% block content %}
   <section>
     <p class='lead'>
-      Remove me as a Recipient.
+      Deleting your account will remove you permanently from the system.  There is no undo!
     </p>
   </section>
   <section class='my-5'>
@@ -15,7 +15,7 @@
       {% csrf_token %}
       {% bootstrap_form_errors form %}
       {% bootstrap_field form.confirm %}
-      {% bootstrap_button "Remove Me" button_type='submit' button_class='btn btn-danger btn-lg btn-block' %}
+      {% bootstrap_button "Delete My Account and All Related Data" button_type='submit' button_class='btn btn-danger btn-lg btn-block' %}
     </form>
   </section>
 {% endblock content %}

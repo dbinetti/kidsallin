@@ -1,0 +1,54 @@
+{% extends 'app/pages/base.html' %}
+
+{% load bootstrap4 %}
+{% load humanize %}
+
+{% block formmedia %}{{ form.media }}{% endblock formmedia %}
+
+{% block title %}Parent Information{% endblock title %}
+
+{% block content %}
+  <section>
+    <p class='lead'>
+      Thank You!
+    </p>
+    <p>
+      More Details Here
+    </p>
+  </section>
+  <section class='my-5'>
+    <div class='card'>
+      <div class='card-header'>
+        <h4>Parent Information</h4>
+      </div>
+      <div class="card-body">
+        <div class='card-text'>
+          <form method='post'>
+            {% csrf_token %}
+            {% bootstrap_form_errors form %}
+
+            {% bootstrap_field form.name show_help=False show_label=False placeholder="Name" %}
+            {% bootstrap_field form.email show_help=False show_label=False placeholder='Email' %}
+            {# {% bootstrap_field form.phone show_help=False show_label=False %} #}
+            {# {% bootstrap_field form.address show_help=True show_label=False  %} #}
+            {% bootstrap_field form.is_public show_help=True show_label=False %}
+            {% bootstrap_field form.is_teacher show_help=True show_label=False %}
+            {% bootstrap_field form.is_medical show_help=True show_label=False %}
+            {% bootstrap_field form.comments show_help=False show_label=False  placeholder='Any other notes? (optional)'%}
+            {% bootstrap_field form.notes show_help=False show_label=False  placeholder='Any other notes? (optional)'%}
+            {% bootstrap_button "Save" button_type='submit' size='large' %}
+            {% bootstrap_button "Cancel" button_type='link' href="/parent" size='large' button_class='btn-light' extra_classes='ml-3'%}
+          </form>
+        </div>
+      </div>
+      <div class='card-footer'>
+        <p>
+          <small class='text-muted'>Please contact <a href='mailto://support@rakeupeagle.com'>support@rakeupeagle.com</a> if you have any questions or need support.</small>
+          {% bootstrap_button "Delete Account" button_type='link' href="/delete" size='large' button_class='btn-danger' extra_classes='float-right'%}
+        </p>
+      </div>
+    </div>
+  </section>
+
+{% endblock content %}
+d
