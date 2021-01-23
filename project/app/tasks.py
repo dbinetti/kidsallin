@@ -13,10 +13,12 @@ from django.core.mail import EmailMultiAlternatives
 from django.db.models import Sum
 from django.http import FileResponse
 from django.template.loader import render_to_string
-from django_rq import job
 
 from .forms import SchoolForm
 from .models import Parent
+
+# from django_rq import job
+
 
 
 # Auth0
@@ -55,7 +57,7 @@ def put_auth0_payload(endpoint, payload):
     )
     return response
 
-@job
+# @job
 def update_user(user):
     data = get_user_data(user.username)
     user.data = data
@@ -69,7 +71,7 @@ def update_user(user):
     return user
 
 
-@job
+# @job
 def delete_user(user_id):
     client = get_auth0_client()
     response = client.users.delete(user_id)
@@ -105,12 +107,12 @@ def build_email(template, subject, from_email, context=None, to=[], cc=[], bcc=[
             email.attach(attachment[0], f.read(), attachment[2])
     return email
 
-@job
+# @job
 def send_email(email):
     return email.send()
 
 
-@job
+# @job
 def send_confirmation(parent):
     email = build_email(
         template='app/emails/confirmation.txt',

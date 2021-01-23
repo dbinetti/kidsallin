@@ -24,7 +24,7 @@ CLOUDINARY_STORAGE = {
 }
 
 # Async settings
-RQ_QUEUES['default']['ASYNC'] = False
+# RQ_QUEUES['default']['ASYNC'] = True
 
 DEBUG_TOOLBAR_PANELS = [
     'debug_toolbar.panels.versions.VersionsPanel',
