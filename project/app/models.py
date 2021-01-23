@@ -36,15 +36,15 @@ class Parent(models.Model):
         null=True,
     )
     is_public = models.BooleanField(
-        blank=False,
+        default=False,
         help_text="""If you'd like to make your name public on the website, click here.""",
     )
     is_teacher = models.BooleanField(
-        blank=False,
+        default=False,
         help_text="""If you're an educator, click here.""",
     )
     is_medical = models.BooleanField(
-        blank=False,
+        default=False,
         help_text="""If you're a medical professional, click here.""",
     )
     comments = models.TextField(
@@ -303,7 +303,7 @@ class User(AbstractBaseUser):
         return self.is_admin
 
     def __str__(self):
-        return str(self.username)
+        return str(self.name)
 
     def has_perm(self, perm, obj=None):
         return True
