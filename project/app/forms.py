@@ -2,12 +2,14 @@
 from django import forms
 from django.contrib.auth.forms import UserChangeForm as UserChangeFormBase
 from django.contrib.auth.forms import UserCreationForm as UserCreationFormBase
-from django.core.exceptions import ValidationError
 
 # Local
 from .models import Parent
 from .models import School
 from .models import User
+
+# from django.core.exceptions import ValidationError
+
 
 
 class DeleteForm(forms.Form):
