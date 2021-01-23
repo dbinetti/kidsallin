@@ -30,6 +30,7 @@
     <title>Kids All In! {% block title %}{% endblock %}</title>
   </head>
   <body>
+    {% block topnav %}
     <nav class="navbar navbar-expand-sm navbar-light">
       <a class="navbar-brand" href="{% url 'index' %}">
         <img class="d-inline-block mr-1" height=85 src="{% static 'app/square_logo.png' %}">
@@ -61,7 +62,7 @@
         </ul>
       </div>
     </nav>
-
+    {% endblock topnav %}
     <div id="content" class='container'>
       {% bootstrap_messages %}
       {% block content %}
