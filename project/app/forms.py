@@ -36,7 +36,7 @@ class ParentForm(forms.ModelForm):
             'notes',
         ]
         labels = {
-            "is_public": "Please make my name Public",
+            "is_public": "Please Make My Name Public",
             "is_teacher": "I am a Professional Educator",
             "is_medical": "I am a Medical Professional",
         }
