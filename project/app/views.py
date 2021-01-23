@@ -22,7 +22,7 @@ from .forms import ParentForm
 # Root
 def index(request):
     if request.user.is_authenticated:
-        return redirect('account')
+        return redirect('parent')
     return render(
         request,
         'app/pages/index.html',
@@ -74,10 +74,6 @@ def callback(request):
     ).json()
     print(token)
     access_token = token['access_token']
-
-    # profile = userinfo(access_token)
-
-
     user_url = f'https://{settings.AUTH0_DOMAIN}/userinfo?access_token={access_token}'
     payload = requests.get(user_url).json()
     # format payload key

@@ -20,7 +20,6 @@ class Parent(models.Model):
         max_length=100,
         blank=False,
         default='',
-        help_text="""Your real name (may include spouse as family).""",
     )
     address = AddressField(
         blank=True,
@@ -37,27 +36,22 @@ class Parent(models.Model):
     )
     is_public = models.BooleanField(
         default=False,
-        help_text="""If you'd like to make your name public on the website, click here.""",
     )
     is_teacher = models.BooleanField(
         default=False,
-        help_text="""If you're an educator, click here.""",
     )
     is_medical = models.BooleanField(
         default=False,
-        help_text="""If you're a medical professional, click here.""",
     )
     comments = models.TextField(
         max_length=2000,
         blank=True,
         default='',
-        help_text="""If you'd like to add a public comment, add it here.  (Note: only productive, on-topic comments will be posted, you must use your real name, and you must set your overall status to 'public'.)""",
     )
     notes = models.TextField(
         max_length=2000,
         blank=True,
         default='',
-        help_text="""If you'd like to add any private notes, add it here.  (Note: these are things you want us to know.)""",
     )
     created = models.DateTimeField(
         auto_now_add=True,
