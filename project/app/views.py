@@ -30,7 +30,7 @@ def index(request):
     )
 
 # Authentication
-def login(request):
+def join(request):
     redirect_uri = request.build_absolute_uri(reverse('callback'))
     state = f"{get_random_string()}"
     request.session['state'] = state

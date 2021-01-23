@@ -17,7 +17,7 @@ urlpatterns = [
     path('support/', TemplateView.as_view(template_name='app/pages/support.html'), name='support',),
 
     # Authentication
-    path('login', views.login, name='login'),
+    path('join', views.join, name='join'),
     path('callback', views.callback, name='callback'),
     path('logout', views.logout, name='logout'),
 

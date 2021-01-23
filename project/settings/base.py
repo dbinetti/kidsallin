@@ -46,7 +46,7 @@ AUTHENTICATION_BACKENDS = [
     'app.backends.Auth0Backend',
 ]
 
-LOGIN_URL = 'login'
+LOGIN_URL = 'join'
 LOGIN_REDIRECT_URL = 'parent'
 LOGOUT_REDIRECT_URL = 'index'
 
