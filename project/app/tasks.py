@@ -2,7 +2,6 @@
 import csv
 
 import requests
-from app.forms import SchoolForm
 # First-Party
 from auth0.v3.authentication import GetToken
 from auth0.v3.management import Auth0
@@ -16,6 +15,9 @@ from django.http import FileResponse
 from django.template.loader import render_to_string
 from django_rq import job
 
+from .forms import SchoolForm
+from .models import Parent
+
 
 # Auth0
 def get_auth0_token():
@@ -26,7 +28,6 @@ def get_auth0_token():
         f'https://{settings.AUTH0_DOMAIN}/api/v2/',
     )
     return token
-
 
 def get_auth0_client():
     token = get_auth0_token()
@@ -67,6 +68,22 @@ def update_user(user):
     return user
 
 
+@job
+def delete_user(user_id):
+    client = get_auth0_client()
+    response = client.users.delete(user_id)
+    return response
+
+# User
+def create_parent(user):
+    parent = Parent.objects.create(
+        user=user,
+        name=user.name,
+        email=user.email,
+    )
+    return parent
+
+
 # Utility
 def build_email(template, subject, from_email, context=None, to=[], cc=[], bcc=[], attachments=[], html_content=None):
     body = render_to_string(template, context)
@@ -102,13 +119,6 @@ def send_confirmation(parent):
         to=[parent.email],
     )
     return email.send()
-
-@job
-def delete_user(user_id):
-    client = get_auth0_client()
-    response = client.users.delete(user_id)
-    return response
-
 
 def schools_list(filename='ada.csv'):
     with open(filename) as f:
