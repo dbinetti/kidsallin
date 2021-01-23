@@ -61,7 +61,10 @@
           "generator": "secret"
         },
         "AUTH0_DOMAIN": {
-          "value": "foo.com"
+          "value": "http://foo.com"
+        },
+        "AUTH0_TENANT": {
+          "value": "http://foo.com"
         },
         "MAILCHIMP_API_KEY": {
           "generator": "secret"

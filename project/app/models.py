@@ -273,6 +273,13 @@ class User(AbstractBaseUser):
         null=True,
         editable=False,
     )
+    picture = models.URLField(
+        max_length=512,
+        blank=True,
+        default='https://www.kidsallin.com/static/app/unknown_small.png',
+        verbose_name="Picture",
+        editable=False,
+    )
     is_active = models.BooleanField(
         default=True,
     )

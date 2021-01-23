@@ -21,18 +21,18 @@ from .models import Parent
 
 # Auth0
 def get_auth0_token():
-    get_token = GetToken(settings.AUTH0_DOMAIN)
+    get_token = GetToken(settings.AUTH0_TENANT)
     token = get_token.client_credentials(
         settings.AUTH0_CLIENT_ID,
         settings.AUTH0_CLIENT_SECRET,
-        f'https://{settings.AUTH0_DOMAIN}/api/v2/',
+        f'https://{settings.AUTH0_TENANT}/api/v2/',
     )
     return token
 
 def get_auth0_client():
     token = get_auth0_token()
     client = Auth0(
-        settings.AUTH0_DOMAIN,
+        settings.AUTH0_TENANT,
         token['access_token'],
     )
     return client
@@ -49,7 +49,7 @@ def put_auth0_payload(endpoint, payload):
         'Authorization': f'Bearer {access_token}',
     }
     response = requests.put(
-        f'https://{settings.AUTH0_DOMAIN}/api/v2/{endpoint}',
+        f'https://{settings.AUTH0_TENANT}/api/v2/{endpoint}',
         headers=headers,
         json=payload,
     )
@@ -60,6 +60,7 @@ def update_user(user):
     data = get_user_data(user.username)
     user.data = data
     user.name = data.get('name', '')
+    user.picture = data.get('picture', '')
     user.first_name = data.get('given_name', '')
     user.last_name = data.get('family_name', '')
     user.email = data.get('email', None)

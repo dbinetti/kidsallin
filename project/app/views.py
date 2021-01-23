@@ -74,7 +74,7 @@ def callback(request):
     ).json()
     print(token)
     access_token = token['access_token']
-    user_url = f'https://{settings.AUTH0_DOMAIN}/userinfo?access_token={access_token}'
+    user_url = f'https://{settings.AUTH0_TENANT}/userinfo?access_token={access_token}'
     payload = requests.get(user_url).json()
     # format payload key
     payload['username'] = payload.pop('sub')
