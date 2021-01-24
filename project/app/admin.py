@@ -38,6 +38,7 @@ class Parent(admin.ModelAdmin):
         'is_public',
         'is_teacher',
         'is_medical',
+        'user',
     ]
     list_editable = [
     ]
