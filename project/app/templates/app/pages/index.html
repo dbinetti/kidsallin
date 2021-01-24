@@ -28,17 +28,24 @@
         </a>
       </div>
       <div>
-        <a href='{% url "faq" %}' class="btn btn-light btn-block btn-lg" data-toggle='modal' data-target='#learnMoreModal'>
+        <a class="btn btn-light btn-block btn-lg" data-toggle='collapse' data-target='#learnMoreCollapse' role='button'>
           Learn More
         </a>
       </div>
-      <div class="modal fade" id="learnMoreModal" tabindex="-1">
-        <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable">
-          <div class="modal-content">
-            <div class="modal-body">
-              Hello World!
-            </div>
-          </div>
+      <div class="collapse" id="learnMoreCollapse">
+        <div class="card card-body mt-3 p-5">
+          <p>
+            With priority-vaccination for teachers scheduled to be complete January 31, it's time to get the <strong>Kids All In</strong> school.  Our objective is Full-Time, In-Person, K-12 instruction by <strong>Monday, March 1</strong>.
+          </p>
+          <p>
+            When you <a href='{% url "join" %}'>Join Us</a> either via email, Google or Facebook, you'll become part of our community of parents, teachers, and staff who are all-in for the kids.  Before every Board meeting we'll produce a report showing the updated totals of the "signatures" we've collected.  (You can choose to keep your name private if you wish.)
+          </p>
+          <p>
+            We all want the same goal, but we've been living this "new normal" for a long time and change &mdash; even for the better &mdash; is always difficult.  The Board of Trustees and District Administration need our support to accomplish this goal, and that's why we created this website.
+          </p>
+          <p>
+            We're not asking for donations, we won't share or sell your data, and <em>we have no agenda beyond getting the Kids All In</em>.  You can learn more in our <a href='{% url "faq" %}'>FAQ</a> or ask any other questions at <a href=''>support@kidsallin.com</a>.  Thank you!
+          </p>
         </div>
       </div>
     </div>
