@@ -2,14 +2,12 @@
 from django import forms
 from django.contrib.auth.forms import UserChangeForm as UserChangeFormBase
 from django.contrib.auth.forms import UserCreationForm as UserCreationFormBase
+from django.core.exceptions import ValidationError
 
 # Local
 from .models import Parent
 from .models import School
 from .models import User
-
-# from django.core.exceptions import ValidationError
-
 
 
 class DeleteForm(forms.Form):
@@ -44,7 +42,7 @@ class ParentForm(forms.ModelForm):
             'comments': forms.Textarea(
                 attrs={
                     'class': 'form-control h-25',
-                    'placeholder': 'Any public comments to share? (Optional, Must be Public)',
+                    'placeholder': 'Any respectful public comments to share? (Optional, Only Shared if Public)',
                     'rows': 5,
                 }
             ),
@@ -57,7 +55,7 @@ class ParentForm(forms.ModelForm):
             )
         }
         help_texts = {
-            'name': "Please provide your real name.  Feel free to include your \
+            'fname': "Please provide your real name.  Feel free to include your \
             spouse to show your support as a family.  Note that all your information \
             remains private unless you explicity ask to be Public.",
             'name': "Please provide your real name.  Feel free to include your \
@@ -65,7 +63,21 @@ class ParentForm(forms.ModelForm):
             remains private unless you explicity ask to be Public below.",
             'is_public': "Showing your support publicly carries more weight, and \
             encourages others to join.",
+            'is_teacher': "This is only shared if you make yourself Public.",
+            'is_medical': "This is only shared if you make yourself Public.",
         }
+
+
+    def clean(self):
+        cleaned_data = super().clean()
+        is_public = cleaned_data.get("is_public")
+        comments = cleaned_data.get("comments")
+
+        if comments and not is_public:
+            raise ValidationError(
+                "Comments are only shared if you make your name public."
+            )
+
 
 
 class SchoolForm(forms.ModelForm):
