@@ -1,9 +1,8 @@
 # Django
-from django.test.client import Client
-
 # First-Party
 import pytest
 from app.factories import UserFactory
+from django.test.client import Client
 
 
 @pytest.fixture
@@ -11,6 +10,17 @@ def anon_client():
     client = Client()
     return client
 
+
+@pytest.fixture
+def user():
+    user = UserFactory(
+        username='user',
+        name='User',
+        email='user@localhost',
+        is_active=True,
+        is_admin=False,
+    )
+    return user
 
 @pytest.fixture
 def user_client():
