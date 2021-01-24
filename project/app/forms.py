@@ -42,7 +42,7 @@ class ParentForm(forms.ModelForm):
             'comments': forms.Textarea(
                 attrs={
                     'class': 'form-control h-25',
-                    'placeholder': 'Any respectful public comments to share? (Optional, Only Shared if Public)',
+                    'placeholder': 'Any respectful, on-topic comments to share publicly? (Optional, Name Must Be Public)',
                     'rows': 5,
                 }
             ),
@@ -55,16 +55,13 @@ class ParentForm(forms.ModelForm):
             )
         }
         help_texts = {
-            'fname': "Please provide your real name.  Feel free to include your \
-            spouse to show your support as a family.  Note that all your information \
-            remains private unless you explicity ask to be Public.",
             'name': "Please provide your real name.  Feel free to include your \
             spouse to show your support as a family.  Note that all your information \
             remains private unless you explicity ask to be Public below.",
             'is_public': "Showing your support publicly carries more weight, and \
             encourages others to join.",
-            'is_teacher': "This is only shared if you make yourself Public.",
-            'is_medical': "This is only shared if you make yourself Public.",
+            'is_teacher': "This is only shared if you make your name public.",
+            'is_medical': "This is only shared if you make your name public.",
         }
 
 

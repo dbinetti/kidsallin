@@ -113,7 +113,7 @@ def account(request):
             form.save()
             messages.success(
                 request,
-                "Updated!",
+                "Saved!",
             )
             return redirect('account')
     else:
