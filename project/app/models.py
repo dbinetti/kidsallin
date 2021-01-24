@@ -61,7 +61,7 @@ class Parent(models.Model):
     )
     user = models.OneToOneField(
         'app.User',
-        on_delete=models.SET_NULL,
+        on_delete=models.CASCADE,
         related_name='parent',
         null=True,
         unique=True,
