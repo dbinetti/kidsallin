@@ -14,13 +14,19 @@ def test_index(admin_client):
     assert response.status_code == 200
 
 @pytest.mark.django_db
-def test_parent(admin_client):
-    path = reverse('admin:app_parent_changelist')
+def test_user(admin_client, user):
+    path = reverse('admin:app_user_changelist')
+    response = admin_client.get(path)
+    assert response.status_code == 200
+    path = reverse('admin:app_user_change', args=(user.id,))
     response = admin_client.get(path)
     assert response.status_code == 200
 
 @pytest.mark.django_db
-def test_user(admin_client, user):
-    path = reverse('admin:app_user_change', args=(user.id,))
+def test_parent(admin_client, user):
+    path = reverse('admin:app_parent_changelist')
+    response = admin_client.get(path)
+    assert response.status_code == 200
+    path = reverse('admin:app_parent_change', args=(user.parent.id,))
     response = admin_client.get(path)
     assert response.status_code == 200

@@ -27,7 +27,7 @@ class Parent(admin.ModelAdmin):
         'is_public',
         'is_teacher',
         'is_medical',
-        'comment',
+        'comments',
         'notes',
     ]
     list_display = [
