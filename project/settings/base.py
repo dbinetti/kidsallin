@@ -66,27 +66,27 @@ DATABASES = {
 }
 
 # Cache
-# CACHES = {
-#     "default": {
-#         "BACKEND": "django_redis.cache.RedisCache",
-#         "LOCATION": env("REDIS_URL"),
-#         "OPTIONS": {
-#             "CLIENT_CLASS": "django_redis.client.DefaultClient",
-#             "CONNECTION_POOL_KWARGS": {
-#                 "max_connections": 20,
-#             },
-#         }
-#     },
-# }
+CACHES = {
+    "default": {
+        "BACKEND": "django_redis.cache.RedisCache",
+        "LOCATION": env("REDIS_URL"),
+        "OPTIONS": {
+            "CLIENT_CLASS": "django_redis.client.DefaultClient",
+            "CONNECTION_POOL_KWARGS": {
+                "max_connections": 20,
+            },
+        }
+    },
+}
 
 # RQ
-# RQ_QUEUES = {
-#     'default': {
-#         'USE_REDIS_CACHE': 'default',
-#         'ASYNC': True,
-#     },
-# }
-# RQ_SHOW_ADMIN_LINK = True
+RQ_QUEUES = {
+    'default': {
+        'USE_REDIS_CACHE': 'default',
+        'ASYNC': True,
+    },
+}
+RQ_SHOW_ADMIN_LINK = True
 
 # Sessions
 SESSION_ENGINE = "django.contrib.sessions.backends.cache"
@@ -252,7 +252,7 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'django.contrib.postgres',
-    # 'django_rq',
+    'django_rq',
     'cloudinary_storage',
     'cloudinary',
     'bootstrap4',
