@@ -5,30 +5,25 @@
 
 {% block formmedia %}{{ form.media }}{% endblock formmedia %}
 
-{% block title %}Parent Information{% endblock title %}
+{% block title %}Account Information{% endblock title %}
 
 {% block content %}
   <section class='my-5'>
     <h2>
       Thank You for Your Support!
     </h2>
-    <p class='lead'>
-      We've registered your support as a parent who wants to get the Kids All In, Full-Time, In-Person, K-12
-    </p>
     <div class='row mt-5'>
       <div class='col-lg-6'>
         <div class="card text-white bg-success mb-3">
           <div class="card-body">
-            <h5 class="card-title">Want to Do More?</h5>
-            <p class="card-text">All accounts start as <em>Private</em>; to give your voice more weight please choose the "Please Make My Name Public" option below and click "Save".</p>
-          </div>
-        </div>
-      </div>
-      <div class='col-lg-6'>
-        <div class="card text-white bg-info mb-3">
-          <div class="card-body">
-            <h5 class="card-title">Want to Do More?</h5>
-            <p class="card-text">Share this site with others on your social network.  Our goal is to present this petition to the West Ada School Board this Tuesday, January 26.</p>
+            <h5 class="card-title">
+              Next Steps
+            </h5>
+            <ul class='list-styled'>
+              <li>Make Your Name Public</li>
+              <li>Add Some Comments</li>
+              <li>Share with your Network</li>
+            </ul>
           </div>
         </div>
       </div>
@@ -36,7 +31,7 @@
   </section>
   <section class='my-5'>
     <div class='card'>
-      <h4 class='card-header'>Parent Information</h4>
+      <h4 class='card-header'>Account Information</h4>
       <div class="card-body">
         <div class='card-text'>
           <form method='post'>
@@ -53,7 +48,7 @@
             {% bootstrap_field form.comments show_help=False show_label=False  placeholder='Any other notes? (optional)'%}
             {# {% bootstrap_field form.notes show_help=False show_label=False  placeholder='Any other notes? (optional)'%} #}
             {% bootstrap_button "Save" button_type='submit' size='large' %}
-            {% bootstrap_button "Cancel" button_type='link' href="/parent" size='large' button_class='btn-light' extra_classes='ml-3'%}
+            {% bootstrap_button "Cancel" button_type='link' href="/account" size='large' button_class='btn-light' extra_classes='ml-3'%}
             {% bootstrap_button "Delete Account" button_type='link' href="/delete" size='large' button_class='btn-danger' extra_classes='float-right'%}
           </form>
         </div>

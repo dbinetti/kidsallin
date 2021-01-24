@@ -23,7 +23,7 @@ from .forms import ParentForm
 # Root
 def index(request):
     if request.user.is_authenticated:
-        return redirect('parent')
+        return redirect('account')
     return render(
         request,
         'app/pages/index.html',
@@ -83,7 +83,7 @@ def callback(request):
     user = authenticate(request, **payload)
     if user:
         log_in(request, user)
-        return redirect('parent')
+        return redirect('account')
     return HttpResponse(status=403)
 
 def logout(request):
@@ -105,7 +105,7 @@ def logout(request):
 
 # Parent
 @login_required
-def parent(request):
+def account(request):
     parent = request.user.parent
     if request.POST:
         form = ParentForm(request.POST, instance=parent)
@@ -115,12 +115,12 @@ def parent(request):
                 request,
                 "Updated!",
             )
-            return redirect('parent')
+            return redirect('account')
     else:
         form = ParentForm(instance=parent)
     return render(
         request,
-        'app/pages/parent.html',
+        'app/pages/account.html',
         context={
             'form': form,
         }

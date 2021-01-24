@@ -21,8 +21,8 @@ urlpatterns = [
     path('callback', views.callback, name='callback'),
     path('logout', views.logout, name='logout'),
 
-    # Parent
-    path('parent', views.parent, name='parent',),
+    # Account
+    path('account', views.account, name='account',),
 
     # Delete
     path('delete', views.delete, name='delete',),

@@ -47,7 +47,7 @@ AUTHENTICATION_BACKENDS = [
 ]
 
 LOGIN_URL = 'join'
-LOGIN_REDIRECT_URL = 'parent'
+LOGIN_REDIRECT_URL = 'account'
 LOGOUT_REDIRECT_URL = 'index'
 
 #Auth0

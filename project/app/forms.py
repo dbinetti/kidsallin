@@ -35,8 +35,8 @@ class ParentForm(forms.ModelForm):
         ]
         labels = {
             "is_public": "Please Make My Name Public",
-            "is_teacher": "I am a Professional Educator",
-            "is_medical": "I am a Medical Professional",
+            "is_teacher": "I'm an Educator/Staff",
+            "is_medical": "I'm a Physician",
         }
         widgets = {
             'comments': forms.Textarea(
