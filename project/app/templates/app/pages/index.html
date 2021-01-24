@@ -28,9 +28,18 @@
         </a>
       </div>
       <div>
-        <a href='{% url "faq" %}' class="btn btn-light btn-block btn-lg">
+        <a href='{% url "faq" %}' class="btn btn-light btn-block btn-lg" data-toggle='modal' data-target='#learnMoreModal'>
           Learn More
         </a>
+      </div>
+      <div class="modal fade" id="learnMoreModal" tabindex="-1">
+        <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable">
+          <div class="modal-content">
+            <div class="modal-body">
+              Hello World!
+            </div>
+          </div>
+        </div>
       </div>
     </div>
   </section>
