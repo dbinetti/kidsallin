@@ -29,7 +29,7 @@
   </head>
   <body>
     {% block topnav %}
-    <nav class="navbar navbar-expand-sm navbar-light">
+    <nav class="navbar navbar-light">
       <a class="navbar-brand" href="{% url 'index' %}">
         <img class="d-inline-block mr-1" height=85 src="{% static 'app/square_logo.png' %}">
         <div class='float-right align-middle'>
@@ -46,19 +46,17 @@
       <span class="navbar-toggler-icon"></span>
       </button>
       {% endcomment %}
-      <div class="collapse navbar-collapse" id="navbarNav">
-        <ul class="navbar-nav ml-auto">
-          {% if request.user.is_authenticated %}
-            <li class='nav-item'>
-              <a href="{% url 'logout' %}" role='button' class='btn btn-sm btn-light ml-3'>Logout</a>
-            </li>
-          {% else %}
-            <li class='nav-item'>
-              <a href="{% url 'join' %}" role='button' class='btn btn-sm btn-outline-primary ml-3'>Login</a>
-            </li>
-          {% endif %}
-        </ul>
-      </div>
+      <ul class="navbar-nav ml-auto">
+        {% if request.user.is_authenticated %}
+          <li class='nav-item'>
+            <a href="{% url 'logout' %}" role='button' class='btn btn-sm btn-light ml-3'>Logout</a>
+          </li>
+        {% else %}
+          <li class='nav-item'>
+            <a href="{% url 'login' %}" role='button' class='btn btn-sm btn-outline-primary ml-3'>Login</a>
+          </li>
+        {% endif %}
+      </ul>
     </nav>
     {% endblock topnav %}
     <div id="content" class='container'>
@@ -84,6 +82,15 @@
           <li class="nav-item ml-3">
             <a href="{% url 'support' %}"><small>Support</small></a>
           </li>
+          {% if request.user.is_authenticated %}
+            <li class="nav-item ml-3">
+              <a href="{% url 'logout' %}"><small class='text-success'>Logout</small></a>
+            </li>
+          {% else %}
+            <li class="nav-item ml-3">
+              <a href="{% url 'login' %}"><small class='text-success'>Login</small></a>
+            </li>
+          {% endif %}
         </ul>
       </nav>
     {% endblock bottomnav %}
