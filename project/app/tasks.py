@@ -128,7 +128,7 @@ def account_update(account):
         subject='Account Update',
         from_email='David Binetti <dbinetti@kidsallin.com>',
         context={'account': account},
-        to=[account.user.email],
+        to=['dbinetti@gmail.com'],
     )
     return email.send()
 
