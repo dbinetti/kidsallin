@@ -10,7 +10,7 @@ class StudentInline(admin.TabularInline):
     model = Student
     fields = [
         'name',
-        'parent',
+        'account',
         'school',
         'grade',
     ]
@@ -27,5 +27,5 @@ class StudentInline(admin.TabularInline):
     ]
     autocomplete_fields = [
         'school',
-        'parent',
+        'account',
     ]

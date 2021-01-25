@@ -5,7 +5,7 @@ from django.contrib.auth.forms import UserCreationForm as UserCreationFormBase
 from django.core.exceptions import ValidationError
 
 # Local
-from .models import Parent
+from .models import Account
 from .models import School
 from .models import User
 
@@ -15,14 +15,14 @@ class DeleteForm(forms.Form):
         required=True,
     )
 
-class ParentForm(forms.ModelForm):
+class AccountForm(forms.ModelForm):
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)
         # Required fields override
         # self.fields['address'].required = True
 
     class Meta:
-        model = Parent
+        model = Account
         fields = [
             'name',
             'phone',

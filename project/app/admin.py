@@ -11,13 +11,13 @@ from django.contrib.auth.admin import UserAdmin as UserAdminBase
 from .forms import UserChangeForm
 from .forms import UserCreationForm
 from .inlines import StudentInline
-from .models import Parent
+from .models import Account
 from .models import School
 from .models import User
 
 
-@admin.register(Parent)
-class Parent(admin.ModelAdmin):
+@admin.register(Account)
+class Account(admin.ModelAdmin):
     save_on_top = True
     fields = [
         'name',

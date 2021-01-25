@@ -3,7 +3,7 @@ from django.db.models.signals import pre_delete
 from django.dispatch import receiver
 
 from .models import User
-from .tasks import create_parent
+from .tasks import create_account
 from .tasks import delete_user
 from .tasks import send_confirmation
 
@@ -21,5 +21,5 @@ def delete_auth0(sender, instance, **kwargs):
 @receiver(post_save, sender=User)
 def user_post_save(sender, instance, created, **kwargs):
     if created:
-        create_parent(instance)
+        create_account(instance)
         send_confirmation.delay(instance)

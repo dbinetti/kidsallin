@@ -12,7 +12,7 @@ from phonenumber_field.modelfields import PhoneNumberField
 from .managers import UserManager
 
 
-class Parent(models.Model):
+class Account(models.Model):
     id = HashidAutoField(
         primary_key=True,
     )
@@ -62,7 +62,7 @@ class Parent(models.Model):
     user = models.OneToOneField(
         'app.User',
         on_delete=models.CASCADE,
-        related_name='parent',
+        related_name='account',
         null=True,
         unique=True,
     )
@@ -240,8 +240,8 @@ class Student(models.Model):
         on_delete=models.CASCADE,
         related_name='schools',
     )
-    parent = models.ForeignKey(
-        'app.Parent',
+    account = models.ForeignKey(
+        'app.Account',
         on_delete=models.CASCADE,
         related_name='schools',
     )

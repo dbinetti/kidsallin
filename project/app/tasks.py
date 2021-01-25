@@ -16,7 +16,7 @@ from django.template.loader import render_to_string
 from django_rq import job
 
 from .forms import SchoolForm
-from .models import Parent
+from .models import Account
 
 
 # Auth0
@@ -76,13 +76,13 @@ def delete_user(user_id):
     return response
 
 # User
-def create_parent(user):
-    parent = Parent.objects.create(
+def create_account(user):
+    account = Account.objects.create(
         user=user,
         name=user.name,
         email=user.email,
     )
-    return parent
+    return account
 
 
 # Utility

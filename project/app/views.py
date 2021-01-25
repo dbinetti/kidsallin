@@ -16,8 +16,8 @@ from django.shortcuts import render
 from django.urls import reverse
 from django.utils.crypto import get_random_string
 
+from .forms import AccountForm
 from .forms import DeleteForm
-from .forms import ParentForm
 
 
 # Root
@@ -103,12 +103,12 @@ def logout(request):
     )
     return redirect(logout_url)
 
-# Parent
+# Account
 @login_required
 def account(request):
-    parent = request.user.parent
+    account = request.user.account
     if request.POST:
-        form = ParentForm(request.POST, instance=parent)
+        form = AccountForm(request.POST, instance=account)
         if form.is_valid():
             form.save()
             messages.success(
@@ -117,7 +117,7 @@ def account(request):
             )
             return redirect('account')
     else:
-        form = ParentForm(instance=parent)
+        form = AccountForm(instance=account)
     return render(
         request,
         'app/pages/account.html',
