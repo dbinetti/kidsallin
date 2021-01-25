@@ -33,9 +33,6 @@ class AccountAdmin(VersionAdmin):
     ]
     list_display = [
         'name',
-        'address',
-        'email',
-        'phone',
         'is_public',
         'is_teacher',
         'is_medical',

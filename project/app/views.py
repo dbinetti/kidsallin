@@ -50,6 +50,25 @@ def join(request):
     ).prepare().url
     return redirect(url)
 
+def login(request):
+    redirect_uri = request.build_absolute_uri(reverse('callback'))
+    state = f"{get_random_string()}"
+    request.session['state'] = state
+    params = {
+        'client_id': settings.AUTH0_CLIENT_ID,
+        'response_type': 'code',
+        'scope': 'openid profile email',
+        'state': state,
+        'redirect_uri': redirect_uri,
+        'prompt': 'login',
+    }
+    url = requests.Request(
+        'GET',
+        f'https://{settings.AUTH0_DOMAIN}/authorize',
+        params=params,
+    ).prepare().url
+    return redirect(url)
+
 def callback(request):
     # Reject if state doesn't match
     browser_state = request.session.get('state')
