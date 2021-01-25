@@ -1,12 +1,18 @@
 {% autoescape off %}
 
-Your registration for Kids All In is confirmed!
+Thank you for joining Kids All In!
+
+We've registered your support for our efforts to get kids in school
+full-time, in-person, K-12 by March 1.  I'll be sure to keep you posted as
+others to join the movement; for now, simply accept my thanks for being
+all-in for the kids!
+
+Best,
+Dave
 
 
-*Details*
-Name: {{recipient.name}}
-Email: {{recipient.email}}
-Dog in Yard? {{recipient.is_dog|yesno|title}}
+PS If you haven't already done so, please consider making your name public,
+adding some comments, and sharing the site on Facebook and other social networks!
 
 
 {% endautoescape %}

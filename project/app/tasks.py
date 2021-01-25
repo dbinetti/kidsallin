@@ -111,13 +111,13 @@ def send_email(email):
 
 
 @job
-def send_confirmation(parent):
+def send_confirmation(user):
     email = build_email(
         template='app/emails/confirmation.txt',
-        subject='Kids All In Confirmation',
-        from_email='Kids All In <support@kidsallin.com>',
-        context={'parent': parent},
-        to=[parent.email],
+        subject='Welcome to Kids All In!',
+        from_email='David Binetti <dbinetti@kidsallin.com>',
+        context={'user': user},
+        to=[user.email],
     )
     return email.send()
 

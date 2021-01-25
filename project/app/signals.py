@@ -6,6 +6,7 @@ from django.dispatch import receiver
 from .models import User
 from .tasks import create_parent
 from .tasks import delete_user
+from .tasks import send_confirmation
 
 # from .tasks import update_user
 
@@ -22,3 +23,4 @@ def delete_auth0(sender, instance, **kwargs):
 def user_post_save(sender, instance, created, **kwargs):
     if created:
         create_parent(instance)
+        send_confirmation.delay(instance)
