@@ -1,0 +1,13 @@
+{% autoescape off %}
+
+Account Update
+
+{{account.name}}
+{{account.user.email}}
+Public: {{account.is_public|yesno|title}}
+Teacher: {{account.is_teacher|yesno|title}}
+Medical: {{account.is_medical|yesno|title}}
+
+{{account.comments|default:"(No Comments)"}}
+
+{% endautoescape %}

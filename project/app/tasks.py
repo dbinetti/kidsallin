@@ -121,6 +121,17 @@ def send_confirmation(user):
     )
     return email.send()
 
+@job
+def account_update(account):
+    email = build_email(
+        template='app/emails/update.txt',
+        subject='Account Update',
+        from_email='David Binetti <dbinetti@kidsallin.com>',
+        context={'account': account},
+        to=[account.user.email],
+    )
+    return email.send()
+
 def schools_list(filename='ada.csv'):
     with open(filename) as f:
         reader = csv.reader(

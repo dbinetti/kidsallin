@@ -18,6 +18,7 @@ from django.utils.crypto import get_random_string
 
 from .forms import AccountForm
 from .forms import DeleteForm
+from .tasks import account_update
 
 
 # Root
@@ -110,11 +111,12 @@ def account(request):
     if request.POST:
         form = AccountForm(request.POST, instance=account)
         if form.is_valid():
-            form.save()
+            account = form.save()
             messages.success(
                 request,
                 "Saved!",
             )
+            account_update.delay(account)
             return redirect('account')
     else:
         form = AccountForm(instance=account)
@@ -125,7 +127,6 @@ def account(request):
             'form': form,
         }
     )
-
 
 # Delete
 @login_required
