@@ -40,6 +40,7 @@ class AccountAdmin(VersionAdmin):
         'is_teacher',
         'is_medical',
         'user',
+        'is_comment',
     ]
     list_editable = [
     ]
@@ -61,6 +62,7 @@ class AccountAdmin(VersionAdmin):
         'created',
     ]
     readonly_fields = [
+        'is_comment',
     ]
     formfield_overrides = {
         AddressField: {
@@ -71,6 +73,10 @@ class AccountAdmin(VersionAdmin):
             )
         }
     }
+
+    def is_comment(self, obj):
+        return bool(obj.comments)
+    is_comment.boolean = True
 
 
 @admin.register(School)
