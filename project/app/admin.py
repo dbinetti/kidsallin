@@ -6,6 +6,7 @@ from django.conf import settings
 from django.contrib import admin
 from django.contrib.admin.views.decorators import staff_member_required
 from django.contrib.auth.admin import UserAdmin as UserAdminBase
+from reversion.admin import VersionAdmin
 
 # Local
 from .forms import UserChangeForm
@@ -17,7 +18,7 @@ from .models import User
 
 
 @admin.register(Account)
-class Account(admin.ModelAdmin):
+class AccountAdmin(VersionAdmin):
     save_on_top = True
     fields = [
         'name',
@@ -73,7 +74,7 @@ class Account(admin.ModelAdmin):
 
 
 @admin.register(School)
-class SchoolAdmin(admin.ModelAdmin):
+class SchoolAdmin(VersionAdmin):
     fields = [
         'name',
         'kind',
