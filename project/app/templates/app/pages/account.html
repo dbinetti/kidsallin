@@ -56,14 +56,14 @@
             {# {% bootstrap_field form.notes show_help=False show_label=False  placeholder='Any other notes? (optional)'%} #}
             {% bootstrap_button "Save" button_type='submit' size='large' %}
             {% bootstrap_button "Cancel" button_type='link' href="/account" size='large' button_class='btn-light' extra_classes='ml-3'%}
-            {% bootstrap_button "Delete Account" button_type='link' href="/delete" size='large' button_class='btn-danger' extra_classes='float-right'%}
           </form>
         </div>
       </div>
       <div class='card-footer'>
-        <p>
+          <div class='float-right'>
+            <a href='{% url "delete" %}'><span class='text-danger'>Delete Account</span></a>
+          </div>
           <small class='text-muted'>Please contact <a href='mailto://support@kidsallin.com'>support@kidsallin.com</a> if you have any questions or need support.</small>
-        </p>
       </div>
     </div>
   </section>
