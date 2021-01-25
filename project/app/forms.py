@@ -69,11 +69,18 @@ class AccountForm(forms.ModelForm):
         cleaned_data = super().clean()
         is_public = cleaned_data.get("is_public")
         comments = cleaned_data.get("comments")
+        name = cleaned_data.get("name")
 
         if comments and not is_public:
             raise ValidationError(
                 "Comments are only shared if you make your name public."
             )
+
+        if is_public and name == 'Anonymous':
+            raise ValidationError(
+                {'name': "Please provide your real name if you wish to be public."}
+            )
+
 
 
 
