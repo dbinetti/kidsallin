@@ -18,6 +18,7 @@ from django.utils.crypto import get_random_string
 
 from .forms import AccountForm
 from .forms import DeleteForm
+from .models import Account
 from .tasks import account_update
 
 
@@ -25,9 +26,14 @@ from .tasks import account_update
 def index(request):
     if request.user.is_authenticated:
         return redirect('account')
+    accounts = Account.objects.filter(
+        is_public=True,
+    ).order_by('created')
+    total = Account.objects.count()
     return render(
         request,
         'app/pages/index.html',
+        {'accounts': accounts, 'total': total,},
     )
 
 # Authentication
