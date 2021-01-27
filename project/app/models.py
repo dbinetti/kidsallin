@@ -316,13 +316,13 @@ class Email(models.Model):
         null=True,
         verbose_name='Subject',
     )
-    spam_score = models.FloatField(
+    spam_score = models.TextField(
         blank=True,
         null=True,
         verbose_name='Spam score',
     )
     # TODO: attachment-info
-    charsets = models.CharField(
+    charsets = models.TextField(
         max_length=255,
         blank=True,
         null=True,
