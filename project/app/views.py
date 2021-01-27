@@ -145,12 +145,18 @@ def account(request):
             return redirect('account')
     else:
         form = AccountForm(instance=account)
+    accounts = Account.objects.filter(
+        is_public=True,
+    ).order_by('created')
+    total = Account.objects.count()
     return render(
         request,
         'app/pages/account.html',
         context={
             'form': form,
-        }
+            'accounts': accounts,
+            'total': total,
+        },
     )
 
 # Delete
