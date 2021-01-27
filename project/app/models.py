@@ -266,7 +266,7 @@ class Email(models.Model):
         verbose_name='DomainKeys Identified Mail',
     )
     # TODO: content-ids
-    to_mailbox = models.TextField(
+    to_email = models.TextField(
         blank=True,
         null=True,
         verbose_name='To',
@@ -286,7 +286,7 @@ class Email(models.Model):
         null=True,
         verbose_name='HTML',
     )
-    from_mailbox = models.TextField(
+    from_email = models.TextField(
         blank=True,
         null=True,
         verbose_name='From',
@@ -309,7 +309,7 @@ class Email(models.Model):
     attachments = models.TextField(
         blank=True,
         null=True,
-        verbose_name='Envelope',
+        verbose_name='Attachments',
     )
     subject = models.TextField(
         blank=True,
@@ -328,7 +328,7 @@ class Email(models.Model):
         null=True,
         verbose_name='Charsets',
     )
-    spf = models.TextField(
+    SPF = models.TextField(
         blank=True,
         null=True,
         verbose_name='Sender Policy Framework',

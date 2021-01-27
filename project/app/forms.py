@@ -99,27 +99,37 @@ class EmailForm(forms.ModelForm):
 
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)
-        self.fields['to_mailbox'].required = False
-        self.fields['from_mailbox'].required = False
-        self.fields['to'] = self.fields['to_mailbox']
-        self.fields['from'] = self.fields['from_mailbox']
+        self.fields['to_email'].required = False
+        self.fields['from_email'].required = False
+        self.fields['to'] = self.fields['to_email']
+        self.fields['from'] = self.fields['from_email']
         # self.fields['attachments'] = forms.IntegerField()
 
     def clean(self):
         cleaned_data = super().clean()
-        cleaned_data['to_mailbox'] = self.cleaned_data.pop('to')
-        cleaned_data['from_mailbox'] = self.cleaned_data.pop('from')
+        cleaned_data['to_email'] = self.cleaned_data.pop('to')
+        cleaned_data['from_email'] = self.cleaned_data.pop('from')
         return cleaned_data
 
     class Meta:
         model = Email
-        exclude = [
-            'created',
-            'updated',
+        fields = [
+            'headers',
+            'dkim',
+            'to_email',
+            'html',
+            'from_email',
+            'text',
+            'sender_ip',
+            'envelope',
+            'attachments',
+            'subject',
+            'charsets',
+            'SPF',
         ]
         widget = {
-            'to_mailbox': forms.HiddenInput,
-            'from_mailbox': forms.HiddenInput,
+            'to_email': forms.HiddenInput,
+            'from_email': forms.HiddenInput,
         }
 
 
