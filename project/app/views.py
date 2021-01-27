@@ -189,8 +189,8 @@ def delete(request):
 @transaction.atomic
 def inbound(request):
     form = EmailForm(request.POST)
+    print(request.POST)
     if form.is_valid():
-        print(form.cleaned_data)
         form.save()
         # print(inbound)
         # attachments_list = list()
