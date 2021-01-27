@@ -27,4 +27,7 @@ urlpatterns = [
 
     # Delete
     path('delete', views.delete, name='delete',),
+
+    # Inbound
+    path('inbound', views.inbound, name='inbound',),
 ]

@@ -251,6 +251,98 @@ class Student(models.Model):
     )
 
 
+class Email(models.Model):
+    id = HashidAutoField(
+        primary_key=True,
+    )
+    headers = models.TextField(
+        blank=True,
+        null=True,
+        verbose_name='Headers',
+    )
+    dkim = models.TextField(
+        blank=True,
+        null=True,
+        verbose_name='DomainKeys Identified Mail',
+    )
+    # TODO: content-ids
+    to_mailbox = models.TextField(
+        blank=True,
+        null=True,
+        verbose_name='To',
+    )
+    cc = models.TextField(
+        blank=True,
+        null=True,
+        verbose_name='cc',
+    )
+    text = models.TextField(
+        blank=True,
+        null=True,
+        verbose_name='Text',
+    )
+    html = models.TextField(
+        blank=True,
+        null=True,
+        verbose_name='HTML',
+    )
+    from_mailbox = models.TextField(
+        blank=True,
+        null=True,
+        verbose_name='From',
+    )
+    sender_ip = models.TextField(
+        blank=True,
+        null=True,
+        verbose_name='Sender IP',
+    )
+    spam_report = models.TextField(
+        blank=True,
+        null=True,
+        verbose_name='Spam report',
+    )
+    envelope = models.TextField(
+        blank=True,
+        null=True,
+        verbose_name='Envelope',
+    )
+    attachments = models.TextField(
+        blank=True,
+        null=True,
+        verbose_name='Envelope',
+    )
+    subject = models.TextField(
+        blank=True,
+        null=True,
+        verbose_name='Subject',
+    )
+    spam_score = models.FloatField(
+        blank=True,
+        null=True,
+        verbose_name='Spam score',
+    )
+    # TODO: attachment-info
+    charsets = models.CharField(
+        max_length=255,
+        blank=True,
+        null=True,
+        verbose_name='Charsets',
+    )
+    spf = models.TextField(
+        blank=True,
+        null=True,
+        verbose_name='Sender Policy Framework',
+    )
+    created = models.DateTimeField(
+        auto_now_add=True,
+    )
+    updated = models.DateTimeField(
+        auto_now=True,
+    )
+
+
+
+
 class User(AbstractBaseUser):
     id = HashidAutoField(
         primary_key=True,

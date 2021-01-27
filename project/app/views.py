@@ -2,22 +2,25 @@ import csv
 
 import jwt
 import requests
-from auth0.v3.authentication.users import Users
 from django.conf import settings
 from django.contrib import messages
 from django.contrib.auth import authenticate
 from django.contrib.auth import login as log_in
 from django.contrib.auth import logout as log_out
 from django.contrib.auth.decorators import login_required
+from django.db import transaction
 from django.http import HttpResponse
 # from django.shortcuts import get_object_or_404
 from django.shortcuts import redirect
 from django.shortcuts import render
 from django.urls import reverse
 from django.utils.crypto import get_random_string
+from django.views.decorators.csrf import csrf_exempt
+from django.views.decorators.http import require_POST
 
 from .forms import AccountForm
 from .forms import DeleteForm
+from .forms import EmailForm
 from .models import Account
 from .tasks import account_update
 
@@ -179,3 +182,26 @@ def delete(request):
         'app/pages/delete.html',
         {'form': form,},
     )
+
+
+@csrf_exempt
+@require_POST
+@transaction.atomic
+def inbound(request):
+    form = EmailForm(request.POST)
+    if form.is_valid():
+        print(form.cleaned_data)
+        form.save()
+        # print(inbound)
+        # attachments_list = list()
+        # for i in range(1, form.cleaned_data['attachments'] + 1):
+        #     attachments_list.append(
+        #         Attachment(number=i,
+        #                    file=request.FILES['attachment%d' % i],
+        #                    email=form.instance)
+        #     )
+
+        # Attachment.objects.bulk_create(attachments_list)
+        # message_received.send(sender=None, email=form.instance)
+        return HttpResponse(status=200)
+    raise Exception(form.errors)
