@@ -207,9 +207,9 @@ def inbound(request):
         # Attachment.objects.bulk_create(attachments_list)
         # message_received.send(sender=None, email=form.instance)
         email = EmailMessage(
-            subject=inbound.subject,
-            body=inbound.text,
-            from_email=inbound.from_email,
+            subject='KAN Inbound',
+            body=f'{inbound.from_email}\n{inbound.subject}\n{inbound.text}',
+            from_email='inbound@kidsallin.com',
             to=['dbinetti@gmail.com'],
         )
         send_email.delay(email)

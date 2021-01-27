@@ -125,7 +125,7 @@ def send_confirmation(user):
 def account_update(account):
     email = build_email(
         template='app/emails/update.txt',
-        subject='Account Update',
+        subject='KAN Update',
         from_email='David Binetti <dbinetti@kidsallin.com>',
         context={'account': account},
         to=['dbinetti@gmail.com'],
