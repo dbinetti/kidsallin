@@ -114,6 +114,8 @@ def callback(request):
     user = authenticate(request, **payload)
     if user:
         log_in(request, user)
+        if user.is_admin:
+            return redirect('admin:index')
         return redirect('account')
     return HttpResponse(status=403)
 
