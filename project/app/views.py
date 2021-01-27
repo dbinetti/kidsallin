@@ -31,7 +31,7 @@ def index(request):
         return redirect('account')
     accounts = Account.objects.filter(
         is_public=True,
-    ).order_by('created')
+    ).order_by('-created')
     total = Account.objects.count()
     return render(
         request,
@@ -150,7 +150,7 @@ def account(request):
         form = AccountForm(instance=account)
     accounts = Account.objects.filter(
         is_public=True,
-    ).order_by('created')
+    ).order_by('-created')
     total = Account.objects.count()
     return render(
         request,
@@ -189,7 +189,6 @@ def delete(request):
 @transaction.atomic
 def inbound(request):
     form = EmailForm(request.POST)
-    print(request.POST)
     if form.is_valid():
         form.save()
         # print(inbound)
