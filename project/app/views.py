@@ -8,6 +8,7 @@ from django.contrib.auth import authenticate
 from django.contrib.auth import login as log_in
 from django.contrib.auth import logout as log_out
 from django.contrib.auth.decorators import login_required
+from django.core.mail import EmailMessage
 from django.db import transaction
 from django.http import HttpResponse
 # from django.shortcuts import get_object_or_404
@@ -23,6 +24,7 @@ from .forms import DeleteForm
 from .forms import EmailForm
 from .models import Account
 from .tasks import account_update
+from .tasks import send_email
 
 
 # Root
@@ -190,7 +192,7 @@ def delete(request):
 def inbound(request):
     form = EmailForm(request.POST)
     if form.is_valid():
-        form.save()
+        inbound = form.save()
         # print(inbound)
         # attachments_list = list()
         # for i in range(1, form.cleaned_data['attachments'] + 1):
@@ -202,5 +204,12 @@ def inbound(request):
 
         # Attachment.objects.bulk_create(attachments_list)
         # message_received.send(sender=None, email=form.instance)
+        email = EmailMessage(
+            subject=inbound.subject,
+            body=inbound.text,
+            from_email=inbound.from_email,
+            to=['dbinetti@gmail.com'],
+        )
+        send_email.delay(email)
         return HttpResponse(status=200)
     raise Exception(form.errors)
