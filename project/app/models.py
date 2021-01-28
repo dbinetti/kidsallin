@@ -71,7 +71,6 @@ class Account(models.Model):
         return f"{self.name}"
 
 
-
 class School(models.Model):
 
     LEVEL = Choices(
@@ -255,6 +254,15 @@ class Email(models.Model):
     id = HashidAutoField(
         primary_key=True,
     )
+    KIND = Choices(
+        (100, 'inbound', 'Inbound'),
+        (200, 'outbound', 'Outbound'),
+    )
+    kind = models.IntegerField(
+        blank=True,
+        null=True,
+        choices=KIND,
+    )
     headers = models.TextField(
         blank=True,
         null=True,
@@ -265,7 +273,6 @@ class Email(models.Model):
         null=True,
         verbose_name='DomainKeys Identified Mail',
     )
-    # TODO: content-ids
     to_email = models.TextField(
         blank=True,
         null=True,
@@ -321,7 +328,6 @@ class Email(models.Model):
         null=True,
         verbose_name='Spam score',
     )
-    # TODO: attachment-info
     charsets = models.TextField(
         max_length=255,
         blank=True,
@@ -333,14 +339,19 @@ class Email(models.Model):
         null=True,
         verbose_name='Sender Policy Framework',
     )
+    user = models.ForeignKey(
+        'app.User',
+        on_delete=models.SET_NULL,
+        related_name='emails',
+        null=True,
+        blank=True,
+    )
     created = models.DateTimeField(
         auto_now_add=True,
     )
     updated = models.DateTimeField(
         auto_now=True,
     )
-
-
 
 
 class User(AbstractBaseUser):

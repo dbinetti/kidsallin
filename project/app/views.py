@@ -23,6 +23,7 @@ from .forms import AccountForm
 from .forms import DeleteForm
 from .forms import EmailForm
 from .models import Account
+from .models import User
 from .tasks import account_update
 from .tasks import send_email
 
@@ -194,21 +195,19 @@ def delete(request):
 def inbound(request):
     form = EmailForm(request.POST)
     if form.is_valid():
-        inbound = form.save()
-        # print(inbound)
-        # attachments_list = list()
-        # for i in range(1, form.cleaned_data['attachments'] + 1):
-        #     attachments_list.append(
-        #         Attachment(number=i,
-        #                    file=request.FILES['attachment%d' % i],
-        #                    email=form.instance)
-        #     )
-
-        # Attachment.objects.bulk_create(attachments_list)
-        # message_received.send(sender=None, email=form.instance)
+        email = form.save(commit=False)
+        try:
+            user = User.objects.get(
+                email=email.from_email,
+            )
+        except User.DoesNotExist:
+            user = None
+        email.kind = email.KIND.inbound
+        email.user = user
+        email.save()
         email = EmailMessage(
             subject='KAN Inbound',
-            body=f'{inbound.from_email}\n{inbound.subject}\n{inbound.text}',
+            body=f'{email.from_email}\n{email.subject}\n{email.text}',
             from_email='inbound@kidsallin.com',
             to=['dbinetti@gmail.com'],
         )
