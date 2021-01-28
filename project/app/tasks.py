@@ -132,6 +132,16 @@ def account_update(account):
     )
     return email.send()
 
+@job
+def delete_user_email(email_address):
+    email = build_email(
+        template='app/emails/delete.txt',
+        subject='Kids All In - Account Deleted',
+        from_email='David Binetti <dbinetti@kidsallin.com>',
+        to=[email_address],
+    )
+    return email.send()
+
 def schools_list(filename='ada.csv'):
     with open(filename) as f:
         reader = csv.reader(
