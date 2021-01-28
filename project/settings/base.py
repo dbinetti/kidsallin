@@ -127,6 +127,9 @@ SENTRY_CONFIG = {
     'traces_sample_rate': 1,
 }
 
+# PostHog
+POSTHOG_API_KEY = env("POSTHOG_API_KEY")
+POSTHOG_HOST = env("POSTHOG_HOST")
 # Bootstrap
 BOOTSTRAP4 = {
     "css_url": {

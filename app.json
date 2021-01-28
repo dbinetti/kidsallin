@@ -72,6 +72,12 @@
         "MAILCHIMP_AUDIENCE_ID": {
           "generator": "secret"
         },
+        "POSTHOG_API_KEY": {
+          "generator": "secret"
+        },
+        "POSTHOG_HOST": {
+          "generator": "secret"
+        },
         "SENDGRID_API_KEY": {
           "generator": "secret"
         },
