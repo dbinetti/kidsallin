@@ -7,12 +7,8 @@ from auth0.v3.authentication import GetToken
 from auth0.v3.management import Auth0
 # Django
 from django.conf import settings
-from django.core.files import File
-from django.core.files.base import ContentFile
 from django.core.mail import EmailMessage
 from django.core.mail import EmailMultiAlternatives
-from django.db.models import Sum
-from django.http import FileResponse
 from django.template.loader import render_to_string
 from django_rq import job
 
@@ -55,6 +51,15 @@ def put_auth0_payload(endpoint, payload):
         headers=headers,
         json=payload,
     )
+    return response
+
+@job
+def update_auth0(user):
+    client = get_auth0_client()
+    payload = {
+        'name': user.name,
+    }
+    response = client.users.update(user.username, payload)
     return response
 
 @job
