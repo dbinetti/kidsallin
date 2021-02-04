@@ -49,10 +49,14 @@
         </div>
       </div>
       <div class='card-footer'>
-          <div class='float-right'>
-            <a href='{% url "delete" %}'><span class='text-danger'>Delete Account</span></a>
+          <div class='row'>
+            <div class='col-7'>
+              <small class='text-muted'>Please contact <a href='mailto://support@kidsallin.com'>support@kidsallin.com</a> if you have any questions or need support.</small>
+            </div>
+            <div class='col-3 offset-2 text-right'>
+              <a href='{% url "delete" %}'><span class='text-danger'>Delete Account</span></a>
+            </div>
           </div>
-          <small class='text-muted'>Please contact <a href='mailto://support@kidsallin.com'>support@kidsallin.com</a> if you have any questions or need support.</small>
       </div>
     </div>
   </section>
