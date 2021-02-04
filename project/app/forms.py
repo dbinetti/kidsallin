@@ -35,7 +35,7 @@ class AccountForm(forms.ModelForm):
             'notes',
         ]
         labels = {
-            "is_public": "Please Make My Name Public",
+            "is_public": "Make My Name Public",
             "is_teacher": "I'm an Educator/Staff",
             "is_medical": "I'm a Physician",
         }
@@ -56,10 +56,9 @@ class AccountForm(forms.ModelForm):
             )
         }
         help_texts = {
-            'name': "Please provide your real name.  Feel free to include your \
-            spouse to show your support as a family.  Note that all your information \
-            remains private unless you explicity ask to be Public below.",
-            'is_public': "Showing your support publicly carries more weight, and \
+            'name': "Please provide your real name.  Your name remains private \
+            unless you explicity ask to be Public below.",
+            'is_public': "Showing your support publicly carries more weight and \
             encourages others to join.",
             'is_teacher': "This is only shared if you make your name public.",
             'is_medical': "This is only shared if you make your name public.",

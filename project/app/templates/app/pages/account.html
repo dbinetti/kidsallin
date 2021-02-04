@@ -10,48 +10,37 @@
 {% block content %}
   <section class='my-5'>
     <h2>
-      Thank You!
+      Thank You for Supporting the Kids!
     </h2>
     <p class='lead'>
-      We've registered your support.
+      Next, there are <strong>two</strong> more things you can do:
     </p>
-    <div class='row mt-5'>
-      <div class='col-lg-6'>
-        <div class="card text-white bg-success mb-3">
-          <div class="card-body">
-            <h5 class="card-title">
-              To Increase Your Impact, Please:
-            </h5>
-            <ul class='list-styled'>
-              <li>Make Your Name Public</li>
-              <li>Add Some Comments</li>
-              <li>Share with your Network</li>
-            </ul>
-            <ul class='list-inline'>
-              <li class='list-inline-item'><iframe src="https://www.facebook.com/plugins/share_button.php?href=https%3A%2F%2Fkidsallin.wistia.com%2Fmedias%2Fv42iv9q80d&layout=button&size=large&appId=840210110164166&width=77&height=28" width="77" height="28" style="border:none;overflow:hidden" scrolling="no" frameborder="0" allowfullscreen="true" allow="autoplay; clipboard-write; encrypted-media; picture-in-picture; web-share"></iframe></li>
-              <li class='list-inline-item'><a href="https://twitter.com/share?ref_src=twsrc%5Etfw" class="twitter-share-button" data-size="large" data-text="If you want the Kids all in school check this out" data-url="https://kidsallin.wistia.com/medias/v42iv9q80d" data-show-count="false">Tweet</a><script async src="https://platform.twitter.com/widgets.js" charset="utf-8"></script></li>
-            </ul>
-          </div>
-        </div>
-      </div>
-    </div>
+    <ul class='list-unstyled p-4'>
+      <li><span class='fa fa-arrow-alt-circle-right'></span>&nbsp;<strong>Make Your Name Public</strong> (below)</li>
+      <li><span class='fa fa-arrow-alt-circle-right'></span>&nbsp;<strong>Share the <script src="https://fast.wistia.com/embed/medias/v42iv9q80d.jsonp" async></script><script src="https://fast.wistia.com/assets/external/E-v1.js" async></script><span class="wistia_embed wistia_async_v42iv9q80d popover=true popoverContent=link" style="display:inline;position:relative"><a href="#">Video</a></span></strong> (click these buttons)
+      </li>
+    </ul>
+    <ul class='list-inline ml-4'>
+      <li class='list-inline-item'><iframe src="https://www.facebook.com/plugins/share_button.php?href=https%3A%2F%2Fkidsallin.wistia.com%2Fmedias%2Fv42iv9q80d&layout=button&size=large&appId=840210110164166&width=77&height=28" width="77" height="28" style="border:none;overflow:hidden" scrolling="no" frameborder="0" allowfullscreen="true" allow="autoplay; clipboard-write; encrypted-media; picture-in-picture; web-share"></iframe></li>
+      <li class='list-inline-item'><a href="https://twitter.com/share?ref_src=twsrc%5Etfw" class="twitter-share-button" data-size="large" data-text="If you want the Kids all in school check this out" data-url="https://kidsallin.wistia.com/medias/v42iv9q80d" data-show-count="false">Tweet</a><script async src="https://platform.twitter.com/widgets.js" charset="utf-8"></script></li>
+    </ul>
   </section>
   <section class='my-5'>
     <div class='card'>
-      <h4 class='card-header'>Account Information</h4>
+      {# <h4 class='card-header'>Account Information</h4> #}
       <div class="card-body">
         <div class='card-text'>
           <form method='post'>
             {% csrf_token %}
             {% bootstrap_form_errors form %}
 
-            {% bootstrap_field form.name show_help=True show_label=True placeholder="Name" %}
+            {% bootstrap_field form.name show_help=False show_label=False placeholder="Name" %}
             {# {% bootstrap_field form.email show_help=True show_label=True placeholder='Email' %} #}
             {# {% bootstrap_field form.phone show_help=False show_label=False %} #}
             {# {% bootstrap_field form.address show_help=True show_label=False  %} #}
             {% bootstrap_field form.is_public show_help=True show_label=False %}
-            {% bootstrap_field form.is_teacher show_help=True show_label=False %}
-            {% bootstrap_field form.is_medical show_help=True show_label=False %}
+            {# {% bootstrap_field form.is_teacher show_help=True show_label=False %} #}
+            {# {% bootstrap_field form.is_medical show_help=True show_label=False %} #}
             {% bootstrap_field form.comments show_help=False show_label=False  placeholder='Any other notes? (optional)'%}
             {# {% bootstrap_field form.notes show_help=False show_label=False  placeholder='Any other notes? (optional)'%} #}
             {% bootstrap_button "Save" button_type='submit' size='large' %}
