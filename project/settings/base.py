@@ -162,13 +162,6 @@ BOOTSTRAP4 = {
     'include_jquery': 'slim',
 }
 
-# Font Awesome
-DJANGO_ICONS = {
-    "ICONS": {
-        "settings": {"name": "far fa-gear"},
-    },
-}
-
 # Middleware
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
