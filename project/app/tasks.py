@@ -55,6 +55,8 @@ def put_auth0_payload(endpoint, payload):
 
 @job
 def update_auth0(user):
+    if not user.username.startswith('auth0|'):
+        return
     client = get_auth0_client()
     payload = {
         'name': user.name,
