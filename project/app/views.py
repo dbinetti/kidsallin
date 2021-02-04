@@ -30,8 +30,6 @@ from .tasks import send_email
 
 # Root
 def index(request):
-    if request.user.is_authenticated:
-        return redirect('account')
     accounts = Account.objects.filter(
         is_public=True,
     ).order_by('-created')

@@ -25,16 +25,7 @@
   <body>
     {% block topnav %}
       <nav class="navbar navbar-expand-sm navbar-light">
-        <a class="navbar-brand" href="{% url 'index' %}"><img class="d-inline-block mr-1" height=85 src='{% static "app/square_logo.png" %}'></a>
-        <div class='float-right'>
-          <h2 style="font-family:Caveat; font-size: 1.3em;" class='mt-2'>
-            Kids All In!
-          </h2>
-          <p style="font-family:Caveat; font-size: 1.0em;">
-            <span class='text-success'>Full-Time</span>, <span class='text-info'>In-Person</span>, <span class='text-danger'>K-12</span>
-          </p>
-        </div>
-
+        <a class="navbar-brand" href="{% url 'index' %}"><img class="d-inline-block mr-1" src='{% static "app/wide_logo.png" %}'></a>
         <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav">
         <span class="navbar-toggler-icon"></span>
         </button>

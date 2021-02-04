@@ -67,29 +67,4 @@
       </div>
     </div>
   </section>
-  <section class='mt-5'>
-    <div class="card">
-      <h5 class="card-header">Community Members</h5>
-      <div class="card-body">
-        <h5 class="card-title">Our movement currently has {{total}} members who support Full-Time, In-Person, K-12 learning by March 1.</h5>
-        <p>Of the {{total}}, here are those who have elected to share their names publicly:</p>
-        <table class='table'>
-          <thead>
-            <tr>
-              <th>Name</th>
-              <th>Comments</th>
-            </tr>
-          </thead>
-          <tbody>
-            {% for account in accounts %}
-              <tr>
-                <td>{{account.name}}</td>
-                <td>{{account.comments}}</td>
-              </tr>
-            {% endfor %}
-          </tbody>
-        </table>
-      </div>
-    </div>
-  </section>
 {% endblock content %}
