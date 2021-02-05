@@ -65,6 +65,15 @@ def update_auth0(user):
     return response
 
 @job
+def update_user_from_account(account):
+    user = account.user
+    if not user.username.startswith('auth0|'):
+        return
+    user.name = account.name
+    user.save()
+    return user
+
+@job
 def update_user(user):
     data = get_user_data(user.username)
     user.data = data
