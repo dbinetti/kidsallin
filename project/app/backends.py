@@ -30,6 +30,10 @@ class Auth0Backend(ModelBackend):
             )
             user.set_unusable_password()
             user.save()
+            posthog.capture(
+                str(user.id),
+                'Create Account',
+            )
         encoded = request.COOKIES.get(f'ph_{settings.POSTHOG_API_KEY}_posthog', None)
         if encoded:
             decoded = json.loads(urllib.parse.unquote(encoded))
