@@ -1,4 +1,5 @@
 import csv
+import json
 
 import jwt
 import requests
@@ -25,6 +26,7 @@ from .forms import EmailForm
 from .models import Account
 from .models import User
 from .tasks import account_update
+from .tasks import create_auth0_user
 from .tasks import send_email
 
 
@@ -212,3 +214,15 @@ def inbound(request):
         send_email.delay(email)
         return HttpResponse(status=200)
     raise Exception(form.errors)
+
+
+@csrf_exempt
+@require_POST
+@transaction.atomic
+def wistia(request):
+    data = json.loads(request.body)
+    create_auth0_user(
+        name=data['events'][0]['payload']['name'],
+        email=data['events'][0]['payload']['email'],
+    )
+    return HttpResponse(status=200)

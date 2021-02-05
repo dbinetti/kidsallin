@@ -4,17 +4,20 @@ import csv
 import requests
 # First-Party
 from auth0.v3.authentication import GetToken
+from auth0.v3.exceptions import Auth0Error
 from auth0.v3.management import Auth0
 # Django
 from django.conf import settings
 from django.core.mail import EmailMessage
 from django.core.mail import EmailMultiAlternatives
 from django.template.loader import render_to_string
+from django.utils.crypto import get_random_string
 from django_rq import job
 
 from .forms import SchoolForm
 from .models import Account
 from .models import Email
+from .models import User
 
 
 # Auth0
@@ -72,6 +75,32 @@ def update_user_from_account(account):
     user.name = account.name
     user.save()
     return user
+
+@job
+def create_auth0_user(name, email):
+    client = get_auth0_client()
+    password = get_random_string()
+    data = {
+        'connection': 'Username-Password-Authentication',
+        'name': name,
+        'email': email,
+        'password': password,
+    }
+    try:
+        response = client.users.create(
+            data,
+        )
+    except Auth0Error:
+        return
+    default = {
+        'name': name,
+        'email': email,
+    }
+    user, created= User.objects.update_or_create(
+        username=response['user_id'],
+        default=default,
+    )
+    return
 
 @job
 def update_user(user):

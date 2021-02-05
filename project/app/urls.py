@@ -30,4 +30,5 @@ urlpatterns = [
 
     # EMail
     path('inbound', views.inbound, name='inbound',),
+    path('wistia', views.wistia, name='wistia',),
 ]
