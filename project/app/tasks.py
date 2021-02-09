@@ -180,6 +180,16 @@ def account_update(account):
     return email.send()
 
 @job
+def account_outreach(account):
+    email = build_email(
+        template='app/emails/outreach.txt',
+        subject='Kids All In - Final Request',
+        from_email='David Binetti <dbinetti@kidsallin.com>',
+        to=[account.email],
+    )
+    return email.send()
+
+@job
 def delete_user_email(email_address):
     email = build_email(
         template='app/emails/delete.txt',
