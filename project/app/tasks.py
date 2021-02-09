@@ -185,7 +185,7 @@ def account_outreach(account):
         template='app/emails/outreach.txt',
         subject='Kids All In - Final Request',
         from_email='David Binetti <dbinetti@kidsallin.com>',
-        to=[account.email],
+        to=[account.user.email],
     )
     return email.send()
 
