@@ -1,5 +1,13 @@
 {% autoescape off %}
 
+**UPDATE**
+
+My email provider overwrote the links in the original message with overly long strings.  This follow-up email should be easier to follow and forward -- it is otherwise identical to what I sent before.  Apologies for the double-send.
+
+Dave
+
+
+
 
 My friend, this will likely be my one and only email to you.
 
