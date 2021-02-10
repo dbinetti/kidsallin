@@ -6,15 +6,41 @@
 
 {% block content %}
   <section class 'mt-5'>
+    {% comment %}
     <div id='id_wistia'>
       <script src="https://fast.wistia.com/embed/medias/beb6fxz2dk.jsonp" async></script><script src="https://fast.wistia.com/assets/external/E-v1.js" async></script><div class="wistia_responsive_padding" style="padding:56.25% 0 0 0;position:relative;"><div class="wistia_responsive_wrapper" style="height:100%;left:0;position:absolute;top:0;width:100%;"><span class="wistia_embed wistia_async_beb6fxz2dk popover=true popoverAnimateThumbnail=true videoFoam=true" style="display:inline-block;height:100%;position:relative;width:100%">&nbsp;</span></div></div>
     </div>
+    {% endcomment %}
     <div class='jumbotron'>
+            <div class='mb-5'>
+        <h2 class='text-center'>
+          Thank You for Getting the <strong>Kids All In!</strong>
+        </h2>
+      </div>
+
+      <div>
+        <p>
+          On Tuesday February 9th, the West Ada School Board voted 4-1 to bring the kids all in school, Full-Time, In-Person, K-12 by March 29 (moved up from the original date of April 13.)
+        </p>
+        <p>
+          While this fell short of our original goal of March 1, I believe we helped shift the conversation to, as Trustee Chair Amy Johnson put it, "not whether we are coming back to school, but how much sooner we can move it forward."  I firmly believe that we played an important part in making that happen, and while the result might not be perfect, it certainly was very, very good.
+        </p>
+        <p>
+          In the coming days, as promised, I will delete any and all personal information and close down the site entirely.  Look for one final email from me immediately before that happens.  But for now, let me simply say thank you.  Thank you for helping get our <strong>Kids All In</strong>.
+        </p>
+        <br>
+        <p class='mb-5'>
+          P.S. Note that you can still <a href='{% url "join" %}'>Join Us</a> if you wish to add your name to ours before we close down!
+        </p>
+
+      </div>
+      {% comment %}
       <div class='mb-5'>
         <h2 class='text-center'>
           Let's Get <strong>Kids All In</strong> School!
         </h2>
       </div>
+      {% endcomment %}
       <div class='mb-5'>
         <p class='lead'>
             {# If you support Full-Time, In-Person, K-12 Instruction you should join our movement! #}
@@ -22,34 +48,30 @@
       </div>
       <div class='mb-3'>
         <a href='{% url "join" %}' class="btn btn-success btn-block btn-lg">
-          Join Us!
+          Join us!
         </a>
       </div>
+      {% comment %}
       <div>
         <a class="btn btn-light btn-block btn-lg" data-toggle='collapse' data-target='#learnMoreCollapse' role='button'>
           Learn More
         </a>
       </div>
+      {% endcomment %}
       <div class="collapse" id="learnMoreCollapse">
         <div class="card card-body mt-3 p-5">
           <p>
-            With priority-vaccination for teachers scheduled to be complete February 13 with more than 90% safety, it's time to get the <strong>Kids All In</strong> school.  Our objective is Full-Time, In-Person, K-12 instruction by <strong>Monday, March 1</strong>.
+            On Tuesday February 9th, the West Ada School Board voted 4-1 to bring the kids all in school, Full-Time, In-Person, K-12 by March 29 (moved up from the original date of April 13.)
           </p>
           <p>
-            To accomplish this goal the District needs your support; we've been living this "new normal" for a long time and change &mdash; even for the better &mdash; is always difficult.  That's why we created this website: to focus our voices and give the Board and Adminstration confidence towards our shared purpose.
+            While this fell short of our original goal of March 1, I believe we helped shift the conversation to, as Trustee Chair Amy Johnson put it, "not whether we are coming back to school, but how much sooner we can move it forward."  I firmly believe that we played an important part in making that happen, and while the result might not be perfect, it certainly was very, very good.
           </p>
           <p>
-            When you <a href='{% url "join" %}'>Join Us</a> via email, Google or Facebook, you'll become part of our community of parents, teachers and staff who are all-in for the kids.  You can participate anonymously or publicly, and before every Board meeting we'll produce reports so Trustees can see how far our support extends.
-          </p>
-          <p>
-            We're not asking for donations, we won't share or sell your data, and <em>we have no agenda beyond getting the Kids All In</em>.  You can learn more in our <a href='{% url "faq" %}'>FAQ</a> or ask any other questions at <a href=''>support@kidsallin.com</a>.
-          </p>
-          <p>
-            <strong>Be All In for the Kids!</strong>
+            In the coming days, as promised, I will delete any and all personal information and close down the site entirely.  Look for one final email from me immediately before that happens.  But for now, let me simply say thank you.  Thank you for helping get our <strong>Kids All In</strong>.
           </p>
           <br>
           <p class='mb-5'>
-            P.S. <a href='{% url "join" %}'>Join Us</a> right now because schools won't open full-time unless you take action!
+            P.S. Note that you can still <a href='{% url "join" %}'>Join Us</a> if you wish to add your name to ours before we close down!
           </p>
         </div>
       </div>
@@ -59,7 +81,7 @@
     <div class="card">
       <h5 class="card-header">Community Members</h5>
       <div class="card-body">
-        <h5 class="card-title">Our movement currently has {{total}} members who support Full-Time, In-Person, K-12 learning by March 1.</h5>
+        <h5 class="card-title">Our movement currently has {{total}} members.</h5>
         <p>Of the {{total}}, here are those who have elected to share their names publicly:</p>
         <table class='table'>
           <thead>
