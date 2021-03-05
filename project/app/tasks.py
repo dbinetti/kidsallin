@@ -190,6 +190,16 @@ def account_outreach(account):
     return email.send()
 
 @job
+def account_final(user):
+    email = build_email(
+        template='app/emails/final.txt',
+        subject='Kids All In - Shutdown Notice',
+        from_email='David Binetti <dbinetti@kidsallin.com>',
+        to=[user.email],
+    )
+    return email.send()
+
+@job
 def delete_user_email(email_address):
     email = build_email(
         template='app/emails/delete.txt',
